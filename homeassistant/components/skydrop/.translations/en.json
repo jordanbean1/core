@@ -9,6 +9,13 @@
         "step": {
             "pick_implementation": {
                 "title": "Pick Authentication Method"
+            },
+            "init": {
+                "title": "Enter Skydrop login information",
+                "data": {
+                    "username": "Username",
+                    "password": "Password"
+                }
             }
         },
         "title": "Skydrop"
