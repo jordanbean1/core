@@ -712,6 +712,9 @@ simplehound==0.3
 # homeassistant.components.simplisafe
 simplisafe-python==9.0.6
 
+# homeassistant.components.skydrop
+skydroppy==0.1.0
+
 # homeassistant.components.sleepiq
 sleepyq==0.7
 

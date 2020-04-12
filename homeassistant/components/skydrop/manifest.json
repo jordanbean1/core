@@ -3,7 +3,9 @@
   "name": "Skydrop",
   "config_flow": true,
   "documentation": "https://www.home-assistant.io/integrations/skydrop",
-  "requirements": [],
+  "requirements": [
+    "skydroppy==0.1.0"
+  ],
   "ssdp": [],
   "zeroconf": [],
   "homekit": {},
