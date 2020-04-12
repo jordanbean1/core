@@ -2,7 +2,5 @@
 
 DOMAIN = "skydrop"
 
-
-# TODO Update with your own urls
-OAUTH2_AUTHORIZE = "https://www.example.com/auth/authorize"
-OAUTH2_TOKEN = "https://www.example.com/auth/token"
+OAUTH2_AUTHORIZE = "https://api.skydrop.com/oauth/authorize"
+OAUTH2_TOKEN = "https://api.skydrop.com/oauth/token"
