@@ -1,0 +1,14 @@
+{
+  "domain": "skydrop",
+  "name": "Skydrop",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/skydrop",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@jordanbean1"
+  ]
+}

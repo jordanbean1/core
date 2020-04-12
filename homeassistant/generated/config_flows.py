@@ -103,6 +103,7 @@ FLOWS = [
     "sentry",
     "shopping_list",
     "simplisafe",
+    "skydrop",
     "smartthings",
     "smhi",
     "solaredge",

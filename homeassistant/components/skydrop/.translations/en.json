@@ -1,0 +1,16 @@
+{
+    "config": {
+        "abort": {
+            "missing_configuration": "The {info.name} component is not configured. Please follow the documentation."
+        },
+        "create_entry": {
+            "default": "Successfully authenticated with Skydrop."
+        },
+        "step": {
+            "pick_implementation": {
+                "title": "Pick Authentication Method"
+            }
+        },
+        "title": "Skydrop"
+    }
+}
