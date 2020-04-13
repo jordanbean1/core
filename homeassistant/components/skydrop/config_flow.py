@@ -1,6 +1,8 @@
 """Config flow for Skydrop."""
+import json
 import logging
 
+import requests
 from skydroppy import SkydropClient
 import voluptuous as vol
 
@@ -70,6 +72,37 @@ class OAuth2FlowHandler(
 
     @staticmethod
     def try_login(username, password):
+        """Try logging in to device and return any errors."""
+
+        params = {"email": username, "password": password}
+
+        try:
+            response = requests.get(
+                url="https://api.skydrop.com/index/auth", params=params
+            )
+        except requests.HTTPError:
+            _LOGGER.error(
+                "Unable to login to Skydrop API: Error Code: %s, Error Reason: %s",
+                response.status_code,
+                response.reason,
+            )
+            return f"{response.status_code}: {response.reason}"
+
+        # Skydrop sends a 200, even if error occurs, have to parse the response
+        if response.status_code == 200:
+            response_content = json.loads(response.text)
+
+            if response_content["error"]:
+                _LOGGER.error(
+                    "Unable to login to Skydrop API: Error Message: %s",
+                    response_content["messages"],
+                )
+                return f"Error: {response_content['messages']}"
+
+        return None
+
+    @staticmethod
+    def try_authenticate(username, password):
         """Try logging in to device and return any errors."""
 
         try:
