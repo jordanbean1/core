@@ -20,10 +20,9 @@ _LOGGER = logging.getLogger(__name__)
 class OAuth2FlowHandler(
     config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
 ):
-    """Config flow to handle Skydrop OAuth2 authentication."""
+    """Config flow to handle Skydrop."""
 
     VERSION = 1
-
     DOMAIN = DOMAIN
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
 
@@ -102,11 +101,32 @@ class OAuth2FlowHandler(
         return None
 
     @staticmethod
-    def try_authenticate(username, password):
+    def try_create_application(client_id, client_secret):
         """Try logging in to device and return any errors."""
 
         try:
-            SkydropClient(username, password)
+            SkydropClient(client_id, client_secret)
+        except SkydropClient.BadRequest:
+            return "BadRequest"
+        except SkydropClient.Unauthorized:
+            return "Unauthorized"
+        except SkydropClient.Forbidden:
+            return "Forbidden"
+        except SkydropClient.TooManyRequests:
+            return "TooManyRequests"
+        except SkydropClient.InternalServerError:
+            return "InternalServerError"
+        except SkydropClient.ClientError:
+            return "ClientError"
+
+        return None
+
+    @staticmethod
+    def try_authenticate(client_id, client_secret):
+        """Try logging in to device and return any errors."""
+
+        try:
+            SkydropClient(client_id, client_secret)
         except SkydropClient.BadRequest:
             return "BadRequest"
         except SkydropClient.Unauthorized:
