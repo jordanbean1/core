@@ -74,7 +74,17 @@ class OAuth2FlowHandler(
 
         try:
             SkydropClient(username, password)
+        except SkydropClient.BadRequest:
+            return "BadRequest"
         except SkydropClient.Unauthorized:
             return "Unauthorized"
+        except SkydropClient.Forbidden:
+            return "Forbidden"
+        except SkydropClient.TooManyRequests:
+            return "TooManyRequests"
+        except SkydropClient.InternalServerError:
+            return "InternalServerError"
+        except SkydropClient.ClientError:
+            return "ClientError"
 
         return None
