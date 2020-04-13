@@ -49,11 +49,7 @@ class OAuth2FlowHandler(
             if error:
                 errors["base"] = error
             else:
-                return self.async_create_entry(
-                    title=user_input[CONF_USERNAME],
-                    data=user_input,
-                    description_placeholders={"docs_url": DOCS_URL},
-                )
+                return await self.async_step_create_entry(user_input=user_input)
 
         return self.async_show_form(
             step_id="user",
@@ -62,6 +58,15 @@ class OAuth2FlowHandler(
             ),
             description_placeholders={"docs_url": DOCS_URL},
             errors=errors,
+        )
+
+    async def async_step_create_entry(self, user_input=None):
+        """Create Entry."""
+
+        return self.async_create_entry(
+            title=user_input[CONF_USERNAME],
+            data=user_input,
+            description_placeholders={"docs_url": DOCS_URL},
         )
 
     @property
