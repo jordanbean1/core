@@ -6,6 +6,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.helpers import config_entry_oauth2_flow
 
+from . import views
 from .const import DOMAIN, OAUTH2_AUTHORIZE
 
 DOCS_URL = "https://www.home-assistant.io/integrations/skydrop"
@@ -60,6 +61,8 @@ class OAuth2FlowHandler(
     async def async_step_authenticate(self):
         """Initiate authentication step."""
 
+        self._create_oauth_view()
+
         return self.async_external_step(
             step_id="user",
             url=f"{OAUTH2_AUTHORIZE}?response_type=code&client_id={self._api_key}&redirect_uri={self._redirect_uri}&config_flow_id={self.flow_id}",
@@ -67,10 +70,21 @@ class OAuth2FlowHandler(
 
         return self.async_external_step_done(next_step_id="finish")
 
+    def _create_oauth_view(self):
+        """Create oauth view."""
+        self.hass.http.register_view(views.SkydropAuthCallbackView())
+
     async def async_step_finish(self, user_input=None):
         """Finalize authentication step."""
 
-        return self.async_create_entry(title=self.data["title"], data=self.data)
+        return self.async_create_entry(
+            title=self.data["title"],
+            data={
+                "api_key": self._api_key,
+                "api_secret": self._api_secret,
+                "redirect_uri": self._redirect_uri,
+            },
+        )
 
     @property
     def logger(self) -> logging.Logger:
