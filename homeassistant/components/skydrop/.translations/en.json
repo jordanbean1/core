@@ -17,8 +17,9 @@
             },
             "user": {
                 "data": {                    
-                    "password": "Password",
-                    "username": "Username"
+                    "api_key": "Consumer Key (API Key)",
+                    "api_secret": "Consumer Secret",
+                    "redirect_uri": "Redirect URI"
                 },
                 "description": "See [Skydrop documentation]({docs_url}).",
                 "title": "Skydrop Account Info"

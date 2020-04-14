@@ -2,15 +2,22 @@
   "config": {
     "title": "Skydrop",
     "step": {
-      "pick_implementation": {
-        "title": "Pick Authentication Method"
+      "user": {
+        "title": "Skydrop Account Info",
+        "data": {
+          "api_key": "Consumer Key (API Key)",
+          "api_secret": "Consumer Secret",
+          "redirect_uri": "Redirect URI"
+        },
+        "description": ""
       }
-    },
-    "abort": {
-      "missing_configuration": "The {info.name} component is not configured. Please follow the documentation."
     },
     "create_entry": {
       "default": "Successfully authenticated with Skydrop."
+    },
+    "abort": {
+      "already_configured": "Already configured",
+      "invalid_credentials": "Invalid credentials"
     }
   }
 }
